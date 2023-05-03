@@ -1,0 +1,62 @@
+{
+    "1": {
+        "id": "junior-developer",
+        "name": "Desarrollador Junior",
+        "description": "Desarrollador Junior",
+        "priorTo": [ "2" ]
+    },
+    "2": {
+        "id": "mid-developer",
+        "name": "Desarrollador Medio",
+        "description": "Desarrollador Medio",
+        "priorTo": [ "3" ]
+    },
+    "3": {
+        "id": "senior-developer",
+        "name": "Desarrollador Senior",
+        "description": "Desarrollador Senior",
+        "priorTo": [ "4", "5" ]
+    },
+    "4": {
+        "id": "technical-leader",
+        "name": "Líder Técnico",
+        "description": "Líder Técnico",
+        "priorTo": [ "6" ]
+    },
+    "5": {
+        "id": "project-leader",
+        "name": "Líder de Proyecto",
+        "description": "Líder de Proyecto",
+        "priorTo": [ "9" ]
+    },
+    "6": {
+        "id": "expert",
+        "name": "Experto",
+        "description": "Experto",
+        "priorTo": [ "7" ]
+    },
+    "7": {
+        "id": "senior-expert",
+        "name": "Experto Medio",
+        "description": "Experto Medio",
+        "priorTo": [ "8" ]
+    },
+    "8": {
+        "id": "senior-expert",
+        "name": "Experto Senior",
+        "description": "Experto Senior",
+        "priorTo": []
+    },
+    "9": {
+        "id": "project-manager",
+        "name": "Gerente de Proyecto",
+        "description": "Gerente de Proyecto",
+        "priorTo": [ "10" ]
+    },
+    "10": {
+        "id": "director",
+        "name": "Director de Proyecto",
+        "description": "Director de Proyecto",
+        "priorTo": []
+    }
+}

@@ -11,14 +11,25 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut:micronaut-inject-java")
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+	implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("org.apache.logging.log4j:log4j-core:2.19.0")
+    implementation("com.google.inject:guice:5.0.1")
+    compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.apache.logging.log4j:log4j-api:2.19.0")
     runtimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.17.2")
+    implementation("io.projectreactor:reactor-core:3.4.6")
     implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-inject-java")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+    implementation("io.micronaut.rxjava3:micronaut-rxjava3-http-client")
 
 }
 
@@ -27,8 +38,8 @@ application {
     mainClass.set("com.middleware.Application")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("17")
-    targetCompatibility = JavaVersion.toVersion("17")
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
 }
 
 graalvmNative.toolchainDetection = false

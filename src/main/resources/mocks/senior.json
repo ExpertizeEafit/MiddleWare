@@ -1,0 +1,99 @@
+{
+    "3": {
+        "id": "senior-developer",
+        "name": "Desarrollador Senior",
+        "description": "Desarrollador Senior",
+        "priorTo": [ "technical leader", "project leader" ],
+        "requirements": [
+            {
+                "id": "python_begginer",
+                "name": "Python Básico",
+                "description": "Python Básico",
+                "status": "completed"
+            },
+            {
+                "id": "java_begginer",
+                "name": "Java Básico",
+                "description": "Java Básico",
+                "status": "pending"
+            },
+            {
+                "id": "git_begginer",
+                "name": "Git Básico",
+                "description": "Git Básico",
+                "status": "pending"
+            },
+            {
+                "id": "docker_begginer",
+                "name": "Docker Básico",
+                "description": "Docker Básico",
+                "status": "unlock"
+            }
+        ]
+
+    },
+    "4": {
+        "id": "technical-leader",
+        "name": "Líder Técnico",
+        "description": "Líder Técnico",
+        "priorTo": [ "expert" ],
+        "requirements": [
+            {
+                "id": "python_expert",
+                "name": "Python Avanzado",
+                "description": "Python Avanzado",
+                "status": "lock"
+            },
+            {
+                "id": "java_expert",
+                "name": "Java Avanzado",
+                "description": "Java Avanzado",
+                "status": "lock"
+            },
+            {
+                "id": "git_expert",
+                "name": "Git Avanzado",
+                "description": "Git Avanzado",
+                "status": "lock"
+            },
+            {
+                "id": "docker_expert",
+                "name": "Docker Avanzado",
+                "description": "Docker Avanzado",
+                "status": "lock"
+            }
+        ]
+    },
+    "5": {
+        "id": "project-leader",
+        "name": "Líder de Proyecto",
+        "description": "Líder de Proyecto",
+        "priorTo": [ "project manager" ],
+        "requirements": [
+            {
+                "id": "leader_culture",
+                "name": "Cultura de Liderazgo",
+                "description": "Cultura de Liderazgo",
+                "status": "lock"
+            },
+            {
+                "id": "project_management",
+                "name": "Gestión de Proyectos",
+                "description": "Gestión de Proyectos",
+                "status": "lock"
+            },
+            {
+                "id": "team_management",
+                "name": "Gestión de Equipos",
+                "description": "Gestión de Equipos",
+                "status": "lock"
+            },
+            {
+                "id": "scrum",
+                "name": "Scrum",
+                "description": "Scrum",
+                "status": "lock"
+            }
+        ]
+    }
+}
