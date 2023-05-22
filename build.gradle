@@ -1,56 +1,37 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.7.4"
+	id 'java'
+	id 'org.springframework.boot' version '3.0.6'
+	id 'io.spring.dependency-management' version '1.1.0'
 }
 
-version = "0.1"
-group = "com.middleware"
+group = 'com.eafit'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
-    annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("io.micronaut:micronaut-http-validation")
-    annotationProcessor("io.micronaut:micronaut-inject-java")
-    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
-    implementation("io.micronaut.security:micronaut-security-jwt")
-	implementation("io.micronaut.security:micronaut-security")
-    implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut:micronaut-jackson-databind")
-    implementation("jakarta.annotation:jakarta.annotation-api")
-    implementation("org.apache.logging.log4j:log4j-core:2.19.0")
-    implementation("com.google.inject:guice:5.0.1")
-    compileOnly("org.projectlombok:lombok")
-    runtimeOnly("org.apache.logging.log4j:log4j-api:2.19.0")
-    runtimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.17.2")
-    implementation("io.projectreactor:reactor-core:3.4.6")
-    implementation("io.micronaut:micronaut-validation")
-    implementation("io.micronaut:micronaut-inject-java")
-    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
-    implementation("io.micronaut.rxjava3:micronaut-rxjava3-http-client")
-
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework:spring-webflux'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-
-application {
-    mainClass.set("com.middleware.Application")
+tasks.named('test') {
+	useJUnitPlatform()
 }
-java {
-    sourceCompatibility = JavaVersion.toVersion("11")
-    targetCompatibility = JavaVersion.toVersion("11")
-}
-
-graalvmNative.toolchainDetection = false
-micronaut {
-    runtime("netty")
-    testRuntime("junit5")
-    processing {
-        incremental(true)
-        annotations("com.middleware.*")
-    }
-}
-
-
-
