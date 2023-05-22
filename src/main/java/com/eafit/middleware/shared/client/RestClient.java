@@ -32,11 +32,6 @@ public class RestClient {
         this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public RestClient(String URL) {
-        this();
-        this.URL = URL;
-    }
-
     public <O> O GET(String path, Class<O> responseType) {
         return getData(path, null, HttpMethod.GET, responseType);
     }
@@ -52,7 +47,7 @@ public class RestClient {
     }
 
     private String getEndpoint(String path) {
-        return String.format("%s/%s", URL, path);
+        return String.format("%s/%s", getBaseEndpoint(), path);
     }
 
     private boolean isAccepted(int statusCode) {
@@ -87,4 +82,7 @@ public class RestClient {
         return null;
     }
 
+    protected String getBaseEndpoint() {
+        return this.URL;
+    }
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -21,10 +23,14 @@ import com.eafit.middleware.shared.dtos.response.RequirementRequestDto;
 
 @Component
 public class ApiClient extends RestClient {
-    private static String apiEndpoint = "http://localhost:8080/expertize/v1/writer";
+    @Value("${api.endpoint}")
+    private String apiEndpoint;
 
-    public ApiClient() {
-        super(apiEndpoint);
+    public ApiClient() { }
+
+    @Override
+    public String getBaseEndpoint() {
+        return this.apiEndpoint;
     }
 
     public Map<String, Seniority> getLearningPath() {
