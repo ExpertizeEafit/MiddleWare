@@ -5,13 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import com.eafit.middleware.shared.client.ApiClient;
@@ -44,17 +39,13 @@ public class AuthenticationService {
     public UserAuthenticated login(UserCredentials userCredentials) {
         UserAuthenticated user = apiClient.login(userCredentials);
 
-        if (Objects.isNull(user)) {
-            // throw exception
-        }
-
         // Genera el token JWT
         List<String> roles = Collections.singletonList(user.rol());
         String token = generateJwtToken(user, roles);
 
-        if (Objects.nonNull(token)) {
-            saveInRedis(token, userCredentials.dni());
-        }
+        // if (Objects.nonNull(token)) {
+        //     saveInRedis(token, userCredentials.dni());
+        // }
 
         return new UserAuthenticated(user.id(), user.username(), user.rol(), user.changePassword(), token);
     }
@@ -80,11 +71,11 @@ public class AuthenticationService {
     public Claims validateTokenAndAuthenticate(String token) {
         try {
             String key = REDIS_PREFIX + token;
-            String username = (String) redisTemplate.opsForValue().get(key);
+            // String username = (String) redisTemplate.opsForValue().get(key);
 
-            if (Objects.nonNull(username)) {
+            // if (Objects.nonNull(username)) {
                 return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
-            }
+            // }
 
         } catch (Exception e) {
         }

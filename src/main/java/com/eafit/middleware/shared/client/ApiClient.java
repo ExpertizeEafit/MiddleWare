@@ -18,9 +18,11 @@ import com.eafit.middleware.shared.dtos.UserCredentials;
 import com.eafit.middleware.shared.dtos.UserRegisteredDto;
 import com.eafit.middleware.shared.dtos.request.RequestCertificationDto;
 import com.eafit.middleware.shared.dtos.request.Seniority;
+import com.eafit.middleware.shared.dtos.response.NewSeniorityRequestDto;
 import com.eafit.middleware.shared.dtos.response.PendingRequirementRequestDto;
 import com.eafit.middleware.shared.dtos.response.RankingResponse;
 import com.eafit.middleware.shared.dtos.response.RequirementRequestDto;
+import com.eafit.middleware.shared.dtos.response.SeniorityRequestDto;
 import com.eafit.middleware.shared.exceptions.RegisterUsersException;
 import com.eafit.middleware.shared.exceptions.UnexpectedInternalException;
 import com.eafit.middleware.shared.exceptions.UserNotFoundException;
@@ -141,5 +143,34 @@ public class ApiClient extends RestClient {
         }).getData(requests.getClass());
 
         return requests;
+    }
+
+    public List<SeniorityRequestDto> getAllSeniorityRequests() {
+        List<SeniorityRequestDto> requests = new ArrayList<>();
+        requests = GET("GetSeniorityRequest").validateData(() -> {
+            throw new UnexpectedInternalException();
+        }).getData(requests.getClass());
+
+        return requests;
+    }
+
+    public String newSeniorityRequest(NewSeniorityRequestDto newRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String response = POST("CreateSeniorityRequest", newRequest, headers).validateData(() -> {
+            throw new UnexpectedInternalException();
+        }).getData(String.class);
+
+        return response;
+    }
+
+    public void updateSeniorityRequest(RequirementRequestDto newRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String response = POST("UpdateSeniorityRequest", newRequest, headers).validateData(() -> {
+            throw new UnexpectedInternalException();
+        }).getData(String.class);
     }
 }

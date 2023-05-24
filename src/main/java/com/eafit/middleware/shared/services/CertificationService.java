@@ -16,8 +16,10 @@ import com.eafit.middleware.shared.dtos.request.RequestCertificationDto;
 import com.eafit.middleware.shared.dtos.request.Requirement;
 import com.eafit.middleware.shared.dtos.request.Seniority;
 import com.eafit.middleware.shared.dtos.response.CertificationResponse;
+import com.eafit.middleware.shared.dtos.response.NewSeniorityRequestDto;
 import com.eafit.middleware.shared.dtos.response.PendingRequirementRequestDto;
 import com.eafit.middleware.shared.dtos.response.RequirementRequestDto;
+import com.eafit.middleware.shared.dtos.response.SeniorityRequestDto;
 
 @Component
 public class CertificationService {
@@ -72,6 +74,18 @@ public class CertificationService {
 
     public List<PendingRequirementRequestDto> getAllPendingRequests() {
         return apiClient.getAllPendingRequests();
+    }
+
+    public List<SeniorityRequestDto> getAllPendingSeniorityRequests() {
+        return apiClient.getAllSeniorityRequests();
+    }
+
+    public void createSeniorityRequest(NewSeniorityRequestDto newRequest) {
+        apiClient.newSeniorityRequest(newRequest);
+    }
+
+    public void updateSeniorityRequest(RequirementRequestDto newRequest) {
+        apiClient.updateSeniorityRequest(newRequest);
     }
 
 }
