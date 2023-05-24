@@ -11,6 +11,7 @@ public class Requirement {
     public String name;
     public String description;
     public String status;
+    public int points;
     public List<Control> controls;
 
     public Requirement() {

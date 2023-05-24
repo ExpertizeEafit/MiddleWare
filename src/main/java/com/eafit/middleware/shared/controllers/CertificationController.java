@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eafit.middleware.shared.dtos.request.RequestCertificationDto;
+import com.eafit.middleware.shared.dtos.response.CertificationResponse;
 import com.eafit.middleware.shared.dtos.response.RequirementRequestDto;
 import com.eafit.middleware.shared.services.CertificationService;
 
@@ -21,22 +22,27 @@ import com.eafit.middleware.shared.services.CertificationService;
 @RequestMapping("/certifications")
 public class CertificationController {
     @Autowired
-    private CertificationService learningService;
-
+    private CertificationService certificationService;
+    
     @GetMapping("/{userId}")
+    public CertificationResponse getCertificationResponse(@PathVariable String userId) {
+        return certificationService.getCertificationResponse(userId);
+    }
+
+    @GetMapping("/all/{userId}")
     public List<RequirementRequestDto> getAllCertificationRequests(@PathVariable String userId) {
-        return learningService.getAllRequests(userId);
-    }   
+        return certificationService.getAllRequests(userId);
+    }
 
     @PostMapping(value = "/upload", consumes = "multipart/form-data")
     public void uploadCertificationRequest(@ModelAttribute RequestCertificationDto certification) {
-        learningService.uploadCertification(certification);
+        certificationService.uploadCertification(certification);
         return;
     }   
 
     @PutMapping("/update")
     public void updateStatus(@RequestBody RequirementRequestDto certification) {
-        learningService.updateCertification(certification);
+        certificationService.updateCertification(certification);
         return;
     }
 }
