@@ -4,6 +4,7 @@ package com.eafit.middleware.shared.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,30 +15,64 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eafit.middleware.shared.dtos.request.RequestCertificationDto;
+import com.eafit.middleware.shared.dtos.response.CertificationResponse;
+import com.eafit.middleware.shared.dtos.response.NewSeniorityRequestDto;
+import com.eafit.middleware.shared.dtos.response.PendingRequirementRequestDto;
 import com.eafit.middleware.shared.dtos.response.RequirementRequestDto;
+import com.eafit.middleware.shared.dtos.response.SeniorityRequestDto;
 import com.eafit.middleware.shared.services.CertificationService;
 
 @RestController
 @RequestMapping("/certifications")
 public class CertificationController {
     @Autowired
-    private CertificationService learningService;
-
+    private CertificationService certificationService;
+    
     @GetMapping("/{userId}")
+    public CertificationResponse getCertificationResponse(@PathVariable String userId) {
+        return certificationService.getCertificationResponse(userId);
+    }
+
+    @GetMapping("/all/{userId}")
     public List<RequirementRequestDto> getAllCertificationRequests(@PathVariable String userId) {
-        return learningService.getAllRequests(userId);
-    }   
+        return certificationService.getAllRequests(userId);
+    }
 
     @PostMapping(value = "/upload", consumes = "multipart/form-data")
     public void uploadCertificationRequest(@ModelAttribute RequestCertificationDto certification) {
-        learningService.uploadCertification(certification);
+        certificationService.uploadCertification(certification);
         return;
     }   
 
+    @Secured({"admin"})
     @PutMapping("/update")
     public void updateStatus(@RequestBody RequirementRequestDto certification) {
-        learningService.updateCertification(certification);
+        certificationService.updateCertification(certification);
         return;
+    }
+
+    @Secured({"admin"})
+    @GetMapping("/pending")
+    public List<PendingRequirementRequestDto> getAllPerdingRequests() {
+        return certificationService.getAllPendingRequests();
+    }
+
+    @Secured({"admin"})
+    @GetMapping("/seniority")
+    public List<SeniorityRequestDto> getAllPedingSeniorityRequests() {
+        return certificationService.getAllPendingSeniorityRequests();
+    }
+
+    @Secured({"admin"})
+    @PostMapping("/seniority")
+    public void createSeniorityRequests(@RequestBody NewSeniorityRequestDto newRequest) {
+        certificationService.createSeniorityRequest(newRequest);
+    }
+
+    @Secured({"admin"})
+    @PutMapping("/seniority")
+    public void createSeniorityRequests(@RequestBody RequirementRequestDto newRequest) {
+        certificationService.updateSeniorityRequest(newRequest);
     }
 }
 

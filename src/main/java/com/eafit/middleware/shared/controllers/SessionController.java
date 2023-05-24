@@ -3,6 +3,7 @@ package com.eafit.middleware.shared.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class SessionController {
     }
 
     @PostMapping("/register")
-    // @Secured({"admin"})
+    @Secured({"admin"})
     public List<UserRegisteredDto> register(@RequestBody List<NewUserDto> users) {
         return authenticationService.register(users);
     }

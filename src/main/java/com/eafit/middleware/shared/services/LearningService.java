@@ -39,14 +39,17 @@ public class LearningService {
     }
 
     private void bindLearningPathScore(LearningPathResponse response) {
-        response.scoreInfo = new Score();
+        // response.scoreInfo = new Score();
         
-        int totalPoints = response.learningPath.stream().mapToInt( seniority -> seniority.points ).sum();
-        int currentPoints = response.learningPath.stream()
-            .filter( seniority -> seniority.status.equals(Status.COMPLETED))
-            .mapToInt( seniority -> seniority.points ).sum();;
+        // int totalPoints = response.learningPath.stream().mapToInt( seniority -> seniority.points ).sum();
+        // int currentPoints = response.learningPath.stream()
+        //     .flatMap( seniority -> seniority.requirements )
+        //     .filter(requirement -> requirement.status.equalsIgnoreCase(Status.COMPLETED))
+        //     .mapToInt( requirement -> seniority.points ).sum();
 
-        response.scoreInfo.points = currentPoints;
-        response.scoreInfo.progress = (int) ((currentPoints / (double) totalPoints) * 100);
+        // // TODO: Para cada Seniority, sumar los puntos de los requirements que estan completados!
+
+        // response.scoreInfo.points = currentPoints;
+        // response.scoreInfo.progress = (int) ((currentPoints / (double) totalPoints) * 100);
     }
 }

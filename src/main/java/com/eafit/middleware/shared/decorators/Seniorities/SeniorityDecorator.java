@@ -20,11 +20,11 @@ public interface SeniorityDecorator {
         }
 
         boolean hasCompleted = seniority.requirements.stream().allMatch(
-                requirement -> requirement.status.equals("completed")
+                requirement -> requirement.status.equalsIgnoreCase("completed")
         );
 
         boolean hasStarted = seniority.requirements.stream().anyMatch(
-                requirement -> requirement.status.equals("pending") || requirement.status.equals("completed")
+                requirement -> requirement.status.equalsIgnoreCase("pending") || requirement.status.equalsIgnoreCase("completed")
         );
 
 
