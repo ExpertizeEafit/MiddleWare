@@ -52,10 +52,9 @@ public class AuthenticationService {
         List<String> roles = Collections.singletonList(user.rol());
         String token = generateJwtToken(user, roles);
 
-        // Active when Redis is running
-        // if (Objects.nonNull(token)) {
-        //     saveInRedis(token, userCredentials.dni());
-        // }
+        if (Objects.nonNull(token)) {
+            saveInRedis(token, userCredentials.dni());
+        }
 
         return new UserAuthenticated(user.id(), user.username(), user.rol(), user.changePassword(), token);
     }
@@ -81,13 +80,11 @@ public class AuthenticationService {
     public Claims validateTokenAndAuthenticate(String token) {
         try {
             String key = REDIS_PREFIX + token;
-            //String username = (String) redisTemplate.opsForValue().get(key);
+            String username = (String) redisTemplate.opsForValue().get(key);
 
-            // if (Objects.nonNull(username)) {
-            //     return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
-            // }
-
-            return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
+            if (Objects.nonNull(username)) {
+                return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
+            }
 
         } catch (Exception e) {
         }
