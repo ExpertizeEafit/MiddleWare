@@ -13,7 +13,7 @@ public class PendingRequirementControlsGenerator implements RequirementControlsG
     public Stream<Requirement> generateControls(Requirement requirement) {
         Requirement.Control control = new Requirement.Control();
         control.name = "View status";
-        control.url = "/progress";
+        control.url = "/certificates";
 
         requirement.controls.add(control);
 

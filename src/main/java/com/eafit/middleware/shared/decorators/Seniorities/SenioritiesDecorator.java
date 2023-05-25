@@ -25,8 +25,8 @@ public class SenioritiesDecorator {
 
     @Autowired
     public SenioritiesDecorator(SimpleSeniorityDecorator simpleSeniorityDecorator,
-            ComplexSeniorityDecorator complexSeniorityDecorator) {
-        decorators = List.of(simpleSeniorityDecorator, complexSeniorityDecorator);
+            ComplexSeniorityDecorator complexSeniorityDecorator, CompletedStatusDecorator completedStatusDecorator) {
+        decorators = List.of(simpleSeniorityDecorator, complexSeniorityDecorator, completedStatusDecorator);
     }
 
     public List<SeniorityComponent> decorate(Map<String, Seniority> seniorities,
